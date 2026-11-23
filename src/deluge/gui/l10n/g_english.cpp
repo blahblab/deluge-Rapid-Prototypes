@@ -1055,6 +1055,12 @@ PLACE_SDRAM_DATA Language english{
         {STRING_FOR_ENV_FOLLOW_Z_SHORT, "Z"},
         {STRING_FOR_ENV_FOLLOW_Y, "Mod wheel (Y)"},
         {STRING_FOR_ENV_FOLLOW_Y_SHORT, "Y"},
+        {STRING_FOR_MIC_VELOCITY, "Mic velocity"},
+        {STRING_FOR_CALIBRATE, "Calibrate"},
+        {STRING_FOR_LIGHTEST_TAP, "Lightest tap"},
+        {STRING_FOR_SOFT_TAP, "Soft tap"},
+        {STRING_FOR_HARD_TAP, "Hard tap"},
+        {STRING_FOR_HARDEST_TAP, "Hardest tap"},
     },
 };
 } // namespace deluge::l10n::built_in

@@ -31,6 +31,7 @@
 #include "gui/waveform/waveform_renderer.h"
 #include "hid/display/display.h"
 #include "hid/led/pad_leds.h"
+#include "hid/pad_velocity.h"
 #include "io/debug/log.h"
 #include "model/clip/audio_clip.h"
 #include "model/clip/instrument_clip_minder.h"
@@ -67,6 +68,15 @@ void MatrixDriver::noPressesHappening(bool inCardRoutine) {
 }
 
 ActionResult MatrixDriver::padAction(int32_t x, int32_t y, int32_t velocity) {
+	// Mic velocity (hid/pad_velocity.h): a press is marked, or taken by the calibration
+	if (velocity) {
+		if (deluge::pad_velocity::pressStart(x, y)) {
+			return ActionResult::DEALT_WITH;
+		}
+	}
+	else if (deluge::pad_velocity::calibrating()) {
+		return ActionResult::DEALT_WITH;
+	}
 	// do not interpret pad actions when stem export is underway
 	if (stemExport.processStarted) {
 		return ActionResult::DEALT_WITH;
@@ -81,6 +91,7 @@ ActionResult MatrixDriver::padAction(int32_t x, int32_t y, int32_t velocity) {
 		return ActionResult::DEALT_WITH; // only happens when booting
 	}
 	ActionResult result = getCurrentUI()->padAction(x, y, velocity);
+	deluge::pad_velocity::pressEnd();
 	if (result == ActionResult::REMIND_ME_OUTSIDE_CARD_ROUTINE) {
 		return ActionResult::REMIND_ME_OUTSIDE_CARD_ROUTINE;
 	}

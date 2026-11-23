@@ -16,6 +16,7 @@
  */
 
 #include "processing/engines/audio_engine.h"
+#include "hid/pad_velocity.h"
 
 #include "chrono"
 #include "definitions.h"
@@ -1519,6 +1520,7 @@ void routine() {
 	}
 
 	audioRoutineLocked = true;
+	deluge::pad_velocity::service(); // Mic velocity: presses measured 2.5 ms on
 
 	numRoutines = 0;
 	if (!stemExport.processStarted || (stemExport.processStarted && !stemExport.renderOffline)) {

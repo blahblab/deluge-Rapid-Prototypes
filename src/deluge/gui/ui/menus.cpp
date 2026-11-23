@@ -150,6 +150,7 @@
 #include "gui/menu_item/osc/source/wave_index.h"
 #include "gui/menu_item/osc/sync.h"
 #include "gui/menu_item/osc/type.h"
+#include "gui/menu_item/pads/pad_velocity.h"
 #include "gui/menu_item/patch_cable_strength/fixed.h"
 #include "gui/menu_item/patch_cables.h"
 #include "gui/menu_item/patched_param/integer.h"
@@ -1912,6 +1913,26 @@ PLACE_SDRAM_BSS menu_item::Submenu soundEditorRootMenuKitGlobalFX{
 };
 
 // Root Menu
+// Mic velocity (hid/pad_velocity.h)
+PLACE_SDRAM_BSS pads::MicVelocity micVelocityMenu{STRING_FOR_ENABLED, STRING_FOR_MIC_VELOCITY};
+PLACE_SDRAM_BSS pads::MicVelocityCalibrate micVelocityCalibrateMenu{STRING_FOR_CALIBRATE};
+PLACE_SDRAM_BSS pads::MicVelocityPoint micVelocityLightestMenu{STRING_FOR_LIGHTEST_TAP, 0, "MIN"};
+PLACE_SDRAM_BSS pads::MicVelocityPoint micVelocitySoftMenu{STRING_FOR_SOFT_TAP, 1, "SOFT"};
+PLACE_SDRAM_BSS pads::MicVelocityPoint micVelocityHardMenu{STRING_FOR_HARD_TAP, 2, "HARD"};
+PLACE_SDRAM_BSS pads::MicVelocityPoint micVelocityHardestMenu{STRING_FOR_HARDEST_TAP, 3, "MAX"};
+/// The curve: the four points side by side, a button under each, the knob turns the one picked
+PLACE_SDRAM_BSS HorizontalMenu micVelocityCurveMenu{
+    STRING_FOR_CURVE, {&micVelocityLightestMenu, &micVelocitySoftMenu, &micVelocityHardMenu, &micVelocityHardestMenu}};
+/// Settings > Mic velocity: at the top level, so Simple Menus (which hides Pads) still shows it
+PLACE_SDRAM_BSS Submenu micVelocitySubmenu{
+    STRING_FOR_MIC_VELOCITY,
+    {
+        &micVelocityCalibrateMenu,
+        &micVelocityCurveMenu,
+        &micVelocityMenu,
+    },
+};
+
 PLACE_SDRAM_BSS Submenu settingsRootMenu{
     STRING_FOR_SETTINGS,
     {
@@ -1923,6 +1944,7 @@ PLACE_SDRAM_BSS Submenu settingsRootMenu{
         &usbAudioMenu,
         &defaultsSubmenu,
         &padsSubmenu,
+        &micVelocitySubmenu,
         &sampleBrowserPreviewModeMenu,
         &flashStatusMenu,
         &recordSubmenu,

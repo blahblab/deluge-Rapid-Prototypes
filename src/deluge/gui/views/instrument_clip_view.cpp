@@ -47,6 +47,7 @@
 #include "hid/led/indicator_leds.h"
 #include "hid/led/pad_leds.h"
 #include "hid/matrix/matrix_driver.h"
+#include "hid/pad_velocity.h"
 #include "io/debug/log.h"
 #include "io/midi/device_specific/specific_midi_device.h"
 #include "io/midi/midi_engine.h"
@@ -2685,6 +2686,8 @@ void InstrumentClipView::editPadAction(bool state, uint8_t yDisplay, uint8_t xDi
 
 					// If new note...
 					if (squareType == SQUARE_NEW_NOTE) {
+						// Mic velocity: the new note takes how hard the pad was tapped, 2.5 ms on
+						deluge::pad_velocity::noteRecorded(clip, modelStackWithNoteRow->noteRowId, firstNote->pos);
 
 						// If we're cross-screen-editing, create other corresponding notes too
 						if (clip->wrapEditing) {

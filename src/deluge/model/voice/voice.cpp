@@ -24,6 +24,7 @@
 #include "dsp/timestretch/time_stretcher.h"
 #include "dsp/util.hpp"
 #include "gui/waveform/waveform_renderer.h"
+#include "hid/pad_velocity.h"
 #include "io/debug/log.h"
 #include "memory/general_memory_allocator.h"
 #include "model/clip/instrument_clip.h"
@@ -167,6 +168,8 @@ bool Voice::noteOn(ModelStackWithSoundFlags* modelStack, int32_t newNoteCodeBefo
 	// Setup some sources which won't change for the duration of this note
 	sourceValues[util::to_underlying(PatchSource::VELOCITY)] =
 	    (velocity == 128) ? 2147483647 : ((int32_t)velocity - 64) * 33554432;
+	padPress_ = deluge::pad_velocity::pressTag();
+	velocityChanged_ = false;
 
 	// "Random" source
 	sourceValues[util::to_underlying(PatchSource::RANDOM)] = getNoise();
@@ -823,6 +826,11 @@ uint32_t Voice::getLocalLFOPhaseIncrement(LFO_ID lfoId, deluge::modulation::para
 	sourcesChanged |= expressionSourcesFinalValueChanged.to_ulong() << util::to_underlying(PatchSource::X);
 
 	expressionSourcesFinalValueChanged.reset();
+
+	if (velocityChanged_) { // Pad velocity from the mic came in
+		sourcesChanged |= 1u << util::to_underlying(PatchSource::VELOCITY);
+		velocityChanged_ = false;
+	}
 
 	// Patch all the sources to their parameters
 	if (sourcesChanged) {
@@ -2598,4 +2606,9 @@ uint32_t Voice::getPriorityRating() const {
 
 	    // Bits  0-23 - time entered
 	    + ((uint32_t)(-envelopes[0].timeEnteredState) & (0xFFFFFFFF >> 8));
+}
+
+void Voice::changeVelocity(uint8_t velocity) {
+	sourceValues[util::to_underlying(PatchSource::VELOCITY)] = (static_cast<int32_t>(velocity) - 64) * 33554432;
+	velocityChanged_ = true;
 }

@@ -593,6 +593,12 @@ PLACE_SDRAM_DATA Language seven_segment{
         {STRING_FOR_ENV_LEVEL, "LEVL"},
         {STRING_FOR_ENV_FOLLOW_Z, "Z"},
         {STRING_FOR_ENV_FOLLOW_Y, "Y"},
+        {STRING_FOR_MIC_VELOCITY, "MICV"},
+        {STRING_FOR_CALIBRATE, "CALI"},
+        {STRING_FOR_LIGHTEST_TAP, "MIN"},
+        {STRING_FOR_SOFT_TAP, "SOFT"},
+        {STRING_FOR_HARD_TAP, "HARD"},
+        {STRING_FOR_HARDEST_TAP, "MAX"},
     },
     &built_in::english,
 };

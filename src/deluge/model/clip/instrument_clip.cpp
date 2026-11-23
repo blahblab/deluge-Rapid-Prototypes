@@ -25,6 +25,7 @@
 #include "gui/views/session_view.h"
 #include "gui/views/view.h"
 #include "hid/buttons.h"
+#include "hid/pad_velocity.h"
 #include "io/midi/midi_device.h"
 #include "io/midi/midi_engine.h"
 #include "memory/general_memory_allocator.h"
@@ -4523,6 +4524,9 @@ doNormal: // Wrap it back to the start.
 	// If that didn't work, get out - but not in the special case for linear recording, discussed below.
 	if (!distanceToNextNote && quantizedPos < effectiveLength) {
 		return;
+	}
+	if (!reversed) {
+		deluge::pad_velocity::noteRecorded(this, modelStack->noteRowId, quantizedPos); // Mic velocity, 2.5 ms on
 	}
 
 	// If we're doing MPE, we'll want to place a node here at the Note's start, so it's got the correct stuff

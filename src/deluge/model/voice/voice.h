@@ -139,10 +139,17 @@ public:
 		return this->getPriorityRating() <=> other.getPriorityRating();
 	}
 
+	/// Pad velocity from the mic (hid/pad_velocity.h): the pad press that started this note (0: none), and that
+	/// press's measured velocity, 2.5 ms in
+	[[nodiscard]] uint8_t padPress() const { return padPress_; }
+	void changeVelocity(uint8_t velocity);
+
 private:
 	// inline int32_t doFM(uint32_t *carrierPhase, uint32_t* lastShiftedPhase, uint32_t carrierPhaseIncrement, uint32_t
 	// phaseShift);
 	bool delete_this_voice_{false};
+	uint8_t padPress_{0};         ///< See padPress()
+	bool velocityChanged_{false}; ///< changeVelocity() since the last render: patch velocity again
 
 	void renderBasicSource(Sound& sound, ParamManagerForTimeline* paramManager, int32_t s, int32_t* oscBuffer,
 	                       int32_t numSamples, bool stereoBuffer, int32_t sourceAmplitude,
