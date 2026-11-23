@@ -25,10 +25,11 @@ internal mic off.
 
 1. Copy the `.bin` from the Releases page to the root of the SD card, as you would any firmware, and hold Shift
    while switching on to install it. DO NOT use a card with important songs, presets, settings etc. on it.
-2. Go to **Settings > Mic velocity > Calibrate** and follow the screen: tap each corner and the centre softly, then
+2. Ensure nothing is plugged in Line Out or Mic otherwise this doesn't do any as the internal mic is blocked. I have not tested with an external mic. 
+3. Go to **Settings > Mic velocity > Calibrate** and follow the screen: tap each corner and the centre softly, then
    medium, then hard, three times each. A sidebar pad cancels. If the levels are too close together, it asks for
    that spot again.
-3. **Settings > Mic velocity > Curve** sets the velocity for the lightest, soft, hard and hardest taps.
+4. **Settings > Mic velocity > Curve** sets the velocity for the lightest, soft, hard and hardest taps.
    **Enabled** turns the feature on and off.
 
 The calibration is saved on the card in `SETTINGS/PADVEL.BIN`.
