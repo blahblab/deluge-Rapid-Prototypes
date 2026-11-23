@@ -1,5 +1,5 @@
 /*
- * Copyright © 2026 Synthstrom Audible Limited
+ * Copyright © 2026 Nicholas Palmer
  *
  * This file is part of The Synthstrom Audible Deluge Firmware.
  *
