@@ -2002,10 +2002,11 @@ void NoteRow::renderRow(TimelineView* editorScreen, RGB rowColour, RGB rowTailCo
 			else if (note && note->pos == squareStartPos) {
 				drewNote = true;
 				drewHead = true;
-				// this is just colour * (0.25 + 0.75 * velocity) but in fixed point, i.e. it'll go linearly from 0.25
-				// to max brightness with velocity
+				// Brightness by velocity on a square curve, 10% to full (for mic velocity): LEDs look bright early, so
+				// a straight line made a soft note look nearly as lit as a hard one
+				const int32_t v = note->velocity;
 				pixel = ((showLocks && note->lockSet) ? lockColour : rowColour)
-				            .adjustFractional((65 + note->velocity + (note->velocity / 2)) << 8, 255 << 8);
+				            .adjustFractional((25 + v * v * 230 / (127 * 127)) << 8, 255 << 8);
 				if (occupancyMask) {
 					occupancyMask[xDisplay] = 64;
 				}
