@@ -1,3 +1,47 @@
+# Deluge rapid prototypes: mic velocity
+
+**Unofficial.** Not made by, checked by, or supported by Synthstrom Audible or the Deluge community firmware team.
+Please don't report problems with this build to either of them.
+
+Prototypes are tested on real hardware, but they are not bug free. Use them at your own risk: back up your SD card
+first, and don't rely on a prototype for a gig or a session you can't lose.
+
+## What it is
+
+The community firmware's main branch (commit fa6b048f2, 22 November 2026) with two additions:
+
+- **Mic velocity.** The Deluge's pads have no velocity. This build listens to the internal microphone: about 2.5 ms
+  after a pad is pressed, the sound of your finger hitting it sets the note's velocity. The note starts at once, as
+  usual, and its velocity is corrected a moment later. Notes you record or tap into the grid keep the measured
+  velocity.
+- **Brightness follows velocity.** Notes on the grid are lit on a curve from 10% to full, so soft notes look soft.
+
+Mic velocity works only while nothing is plugged into line in or the mic jack, because either one switches the
+internal mic off.
+
+## Using it
+
+1. Copy the `.bin` from the Releases page to the root of the SD card, as you would any firmware, and hold Shift
+   while switching on to install it.
+2. Go to **Settings > Mic velocity > Calibrate** and follow the screen: tap each corner and the centre softly, then
+   medium, then hard, three times each. A sidebar pad cancels. If the levels are too close together, it asks for
+   that spot again.
+3. **Settings > Mic velocity > Curve** sets the velocity for the lightest, soft, hard and hardest taps.
+   **Enabled** turns the feature on and off.
+
+The calibration is saved on the card in `SETTINGS/PADVEL.BIN`.
+
+## Known limits
+
+- A loud song playing through the Deluge's own speaker, or a noisy room, can push velocities up.
+- Calibration is per Deluge, and it changes if the Deluge sits on a different surface.
+
+## Licence
+
+GPL-3.0, like the firmware it's built on. The source for this build is this branch.
+
+---
+
 # Deluge Community Firmware
 
 ## Dear Deluge owners
