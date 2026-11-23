@@ -1,5 +1,7 @@
 # Deluge rapid prototypes: mic velocity
 
+**Important** - Rapid Prototype means exactly that , it's a toe in the water throwaway "does this even work, and is it worth perusing with real code by experienced Audio/UX coders" piece of work.
+
 **Unofficial.** Not made by, checked by, or supported by Synthstrom Audible or the Deluge community firmware team.
 Please don't report problems with this build to either of them.
 
@@ -22,7 +24,7 @@ internal mic off.
 ## Using it
 
 1. Copy the `.bin` from the Releases page to the root of the SD card, as you would any firmware, and hold Shift
-   while switching on to install it.
+   while switching on to install it. DO NOT use a card with important songs, presets, settings etc. on it.
 2. Go to **Settings > Mic velocity > Calibrate** and follow the screen: tap each corner and the centre softly, then
    medium, then hard, three times each. A sidebar pad cancels. If the levels are too close together, it asks for
    that spot again.
@@ -34,7 +36,7 @@ The calibration is saved on the card in `SETTINGS/PADVEL.BIN`.
 ## Known limits
 
 - A loud song playing through the Deluge's own speaker, or a noisy room, can push velocities up.
-- Calibration is per Deluge, and it changes if the Deluge sits on a different surface.
+- Calibration is per Deluge, and it changes if the Deluge sits on a different surface or different room.
 
 ## Licence
 
