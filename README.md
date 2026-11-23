@@ -1,6 +1,6 @@
 # Deluge rapid prototypes: mic velocity
 
-**Important** - Rapid Prototype means exactly that , it's a toe in the water throwaway "does this even work, and is it worth perusing with real code by experienced Audio/UX coders" piece of work.
+**Important** - Rapid Prototype means exactly that , it's a toe in the water throwaway "does this even work, and is it worth persuing with real code by experienced Audio/UX coders" piece of work.
 
 **Unofficial.** Not made by, checked by, or supported by Synthstrom Audible or the Deluge community firmware team.
 Please don't report problems with this build to either of them.
